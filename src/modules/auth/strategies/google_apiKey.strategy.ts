@@ -9,11 +9,10 @@ import "dotenv/config"
 export class GoogleApiKeyStrategy extends PassportStrategy(HeaderAPIKeyStrategy,"googlecode") {
     constructor(private reflector: Reflector){
         super({header:"code",prefix:""},true, async (code,done) =>{
-            // Unable to authenticate the user
             if(!code) done(new BadRequestException("the code was not provided"),null);
 
             const url = 
-            `https://oauth2.googleapis.com/token?code=${code}&redirect_uri=${process.env.FRONT_URL}/login/oauth&client_id=${process.env.GOOGLE_ID}&client_secret=${process.env.GOOGLE_SECRET}&grant_type=authorization_code`            
+            `https://oauth2.googleapis.com/token?code=${code}&redirect_uri=${process.env.FRONT_URL}/src/assets/oauthPage.html&client_id=${process.env.GOOGLE_ID}&client_secret=${process.env.GOOGLE_SECRET}&grant_type=authorization_code`            
             
             let config = {
                 method: 'post',

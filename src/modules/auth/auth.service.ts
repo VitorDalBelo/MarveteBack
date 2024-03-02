@@ -85,14 +85,26 @@ export class AuthService {
   }
 
   async googleLogin(googleCredentials: GoogleCredentialsDto) {
-    const googleUser = this.jwtService.decode(googleCredentials.id_token) as GoogleUserDto;
+    let googleUser = this.jwtService.decode(googleCredentials.id_token) as GoogleUserDto;
     if(!googleUser.email) throw new BadRequestException("Email field is missing, change the parameters when redirecting the user to the goole authentication server");
     const user : any = await this.usersService.findOne(googleUser.email);
     if(!user) throw new NotFoundException("We didn't recognize that account");
     user.googleAccont = true;
+
+    if(!googleUser.picture){
+      user.googleRefreshToken
+      const url = `https://oauth2.googleapis.com/token?client_id=${process.env.GOOGLE_ID}&client_secret=${process.env.GOOGLE_SECRET}&refresh_token=${user.googleRefreshToken}&grant_type=refresh_token`
+      await axios.post(url)
+      .then( async resp=>{
+        
+        await axios.get("https://www.googleapis.com/userinfo/v2/me",{headers:{Authorization:`Bearer ${resp.data.access_token}`}})
+        .then(resp=> googleUser = resp.data)
+        .catch(()=>console.log("erro 2 "))
+      })
+      .catch(()=>console.log("erro 1 ",url,user))
+    }
     user.photo = googleUser.picture;
     user.name =  googleUser.name;
-
     return await this.login(user)
 
   }
@@ -110,10 +122,9 @@ export class AuthService {
       return null
     })
 
-    if(token) return token
+    if(false) return token
     else{
       const accessTokenEntity : AccessToken = await this.accessTokenRepository.findOne({where:{token:oldToken},relations:["user_id"],relationLoadStrategy:"query"});
-      console.log("gerando novo token",accessTokenEntity);
       if(!accessTokenEntity || !accessTokenEntity.user_id) throw new NotFoundException("No users found with this email");
       const user = accessTokenEntity.user_id as User;
       if(!user.hashpassword && user.googleRefreshToken){

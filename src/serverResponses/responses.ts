@@ -19,6 +19,13 @@ export const LoginOk = {
   },
 }
 
+export const Ok = {
+  status: 200,
+  description: 'Ok',
+  
+}
+
+
 export const Unauthorized = {
   status: 401,
   description: 'Unauthorized',
@@ -56,6 +63,28 @@ export const Forbidden = {
           message: {
             type: 'string',
             example: 'The account is a google accont'
+          }
+        }
+      }
+    }
+  }
+}
+
+export const ServiceUnavailable = {
+  status: 503,
+  description: 'Forbidden',
+  content: {
+    'application/json': {
+      schema: {
+        type: 'object',
+        properties: {
+          statusCode: {
+            type: 'number',
+            example: 503
+          },
+          message: {
+            type: 'string',
+            example: 'service unavailable'
           }
         }
       }

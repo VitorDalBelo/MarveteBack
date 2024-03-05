@@ -16,7 +16,7 @@ export class DatabaseConfigService implements TypeOrmOptionsFactory{
             database:process.env.DB_NAME,
             entities:[__dirname + '/../**/*.entity{.js,ts}'],
             logging:false,
-            synchronize:true,
+            synchronize:process.env.DEVELOPMENT === 'true',
             schema:"public",
             verboseRetryLog:true
             // ssl: {

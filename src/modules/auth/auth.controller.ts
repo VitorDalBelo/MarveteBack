@@ -2,7 +2,7 @@ import { Controller,Post, Body, BadRequestException, InternalServerErrorExceptio
 import { AuthService } from './auth.service';
 import { ApiExtraModels, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { SignupAuthDto } from './dto/signup-auth.dto';
-import { BadRequest, Conflict, Forbidden, InternalServerError, LoginOk, Unauthorized, UserCreated } from 'src/serverResponses/responses';
+import { BadRequest, Conflict, Forbidden, InternalServerError, LoginOk, Unauthorized, UserCreated } from '../../serverResponses/responses';
 import { AuthGuard } from '@nestjs/passport';
 import { Request } from 'express';
 import { User } from '../users/entities/user.entity';

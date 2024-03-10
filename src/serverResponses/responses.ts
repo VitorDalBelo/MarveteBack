@@ -1,6 +1,6 @@
 import { getSchemaPath } from "@nestjs/swagger";
-import { GetAccessTokenDto } from "src/modules/auth/dto/get-access_token-auth.dto";
-import { GetUserDto } from "src/modules/users/dto/get-user.dto";
+import { GetAccessTokenDto } from "../modules/auth/dto/get-access_token-auth.dto";
+import { GetUserDto } from "../modules/users/dto/get-user.dto";
 
 
 export const UserCreated = {

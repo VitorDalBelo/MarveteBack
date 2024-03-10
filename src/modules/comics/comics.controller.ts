@@ -1,8 +1,8 @@
 import { Controller, Get, ServiceUnavailableException, UseGuards } from '@nestjs/common';
 import { ComicsService } from './comics.service';
 import { ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
-import { BadRequest, InternalServerError, Ok, ServiceUnavailable, Unauthorized } from 'src/serverResponses/responses';
-import marvel from 'src/services/marvel';
+import { BadRequest, InternalServerError, Ok, ServiceUnavailable, Unauthorized } from '../../serverResponses/responses';
+import marvel from '../../services/marvel';
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags("comics")

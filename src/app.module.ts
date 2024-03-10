@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DatabaseConfigService } from 'config/database';
+import { DatabaseConfigService } from '../config/database';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';

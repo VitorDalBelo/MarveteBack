@@ -18,10 +18,10 @@ export class DatabaseConfigService implements TypeOrmOptionsFactory{
             logging:false,
             synchronize:process.env.DEVELOPMENT === 'true',
             schema:"public",
-            verboseRetryLog:true
-            // ssl: {
-            //     rejectUnauthorized: false, // Isso desativa a verificação de certificado SSL. Use com cautela!
-            // }
+            verboseRetryLog:true,
+            ssl: {
+                rejectUnauthorized: false, // Isso desativa a verificação de certificado SSL. Use com cautela!
+            }
 
        }
     }

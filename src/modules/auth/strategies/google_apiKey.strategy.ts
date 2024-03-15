@@ -24,7 +24,7 @@ export class GoogleApiKeyStrategy extends PassportStrategy(HeaderAPIKeyStrategy,
               .then((response) => done(null,response.data))
               .catch((error) => {
                 console.log(error);
-                done(new UnauthorizedException("Failed to communicate with the Google server, check if the code is correct",error.response.data),null)
+                done(new UnauthorizedException("Failed to communicate with the Google server, check if the code is correct",error.response),null)
               });
             
         })

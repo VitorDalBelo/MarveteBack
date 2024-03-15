@@ -12,7 +12,7 @@ export class GoogleApiKeyStrategy extends PassportStrategy(HeaderAPIKeyStrategy,
             if(!code) done(new BadRequestException("the code was not provided"),null);
 
             const url = 
-            `https://oauth2.googleapis.com/token?code=${code}&redirect_uri=${process.env.FRONT_URL}/src/assets/oauthPage.html&client_id=${process.env.GOOGLE_ID}&client_secret=${process.env.GOOGLE_SECRET}&grant_type=authorization_code`            
+            `https://oauth2.googleapis.com/token?code=${code}&redirect_uri=${process.env.FRONT_URL}/oauthPage.html&client_id=${process.env.GOOGLE_ID}&client_secret=${process.env.GOOGLE_SECRET}&grant_type=authorization_code`            
             
             let config = {
                 method: 'post',
